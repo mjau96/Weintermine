@@ -8,5 +8,15 @@
     "hours": "Details zu Tageszeiten laut Veranstalter",
     "description":"Beschreibung",
     "source": "test.weinfesttest.de"
+  },
+  {
+    "name": "Test Besen",
+    "category": "Besenzeit",
+    "city": "Waiblingen",
+    "address": "Waiblingen",
+    "dateRange": "23. – 27. September 2026",
+    "hours": "Details zu Tageszeiten laut Veranstalter",
+    "description":"Beschreibung",
+    "source": "test.weinfesttest.de"
   }
 ]
