@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weinlese-Kalender · Stuttgart, Remstal & Esslingen</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#5C1A2B;
+    --wine-deep:#3B0F1C;
+    --cream:#F6EFE3;
+    --sand:#FBF7ED;
+    --gold:#B98A3D;
+    --ink:#2B1B16;
+  }
+  body{ background-color:var(--cream); color:var(--ink); font-family:'Inter',sans-serif; }
+  .font-display{ font-family:'Fraunces','Inter',serif; }
+  .font-mono{ font-family:'Space Mono',monospace; }
+
+  /* vineyard-row signature divider: repeating diagonal "vine rows" */
+  .vine-rows{
+    height:34px;
+    background-image: repeating-linear-gradient(115deg, transparent 0 18px, rgba(92,26,43,0.16) 18px 20px);
+  }
+  .vine-rows-gold{
+    height:10px;
+    background-image: repeating-linear-gradient(115deg, transparent 0 18px, rgba(185,138,61,0.55) 18px 19px);
+  }
+
+  /* wax-seal date badge */
+  .seal{
+    background: radial-gradient(circle at 30% 30%, #7a2439, var(--wine) 70%);
+    color:#F6EFE3;
+    box-shadow: 0 2px 6px rgba(59,15,28,0.35), inset 0 0 0 2px rgba(246,239,227,0.25);
+  }
+
+  .card{
+    background:var(--sand);
+    border:1px solid rgba(92,26,43,0.12);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px -12px rgba(59,15,28,0.35);
+  }
+
+  .filter-btn{
+    font-family:'Space Mono',monospace;
+    letter-spacing:.04em;
+    transition: all .2s ease;
+  }
+  .filter-btn.active{
+    background:var(--wine);
+    color:var(--cream);
+    border-color:var(--wine);
+  }
+
+  ::selection{ background:var(--gold); color:var(--wine-deep); }
+
+  @media (prefers-reduced-motion: reduce){
+    .card{ transition:none; }
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- HERO -->
+<header class="relative bg-[var(--wine-deep)] text-[var(--cream)] overflow-hidden">
+  <div class="max-w-5xl mx-auto px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
+    <p class="font-mono text-xs sm:text-sm uppercase tracking-widest text-[var(--gold)] mb-4">Region Stuttgart · Remstal · Esslingen</p>
+    <h1 class="font-display italic text-4xl sm:text-6xl leading-[1.05] mb-5">
+      Wo gerade<br class="hidden sm:block"> der Besen hängt.
+    </h1>
+    <p class="max-w-xl text-[15px] sm:text-base text-[#E9DCC9] leading-relaxed">
+      Besenwirtschaften, Straußwirtschaften und Weinfeste zwischen Neckar und Remstal – gesammelt, sortiert und stets mit einem Blick auf die aktuellen Öffnungszeiten.
+    </p>
+  </div>
+  <div class="vine-rows-gold"></div>
+</header>
+<div class="vine-rows"></div>
+
+<!-- CONTROLS -->
+<main class="max-w-5xl mx-auto px-6 py-10">
+  <div class="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between mb-8">
+    <div class="relative w-full sm:max-w-xs">
+      <input id="searchInput" type="text" placeholder="Ort oder Weingut suchen…"
+        class="w-full bg-[var(--sand)] border border-[var(--wine)]/20 rounded-full py-2.5 pl-5 pr-4 text-sm placeholder:text-[var(--ink)]/40 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]" />
+    </div>
+    <div id="filterBar" class="flex flex-wrap gap-2 text-xs uppercase">
+      <button data-filter="Alle" class="filter-btn active border border-[var(--wine)]/30 rounded-full px-4 py-2">Alle</button>
+      <button data-filter="Besenzeit" class="filter-btn border border-[var(--wine)]/30 rounded-full px-4 py-2">Besenzeit</button>
+      <button data-filter="Weinfest" class="filter-btn border border-[var(--wine)]/30 rounded-full px-4 py-2">Weinfest</button>
+    </div>
+  </div>
+
+  <p id="resultCount" class="font-mono text-xs text-[var(--wine)]/70 mb-4"></p>
+
+  <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+  <p id="emptyState" class="hidden text-center text-sm text-[var(--ink)]/60 py-16 font-display italic text-lg">
+    Für diese Suche hängt gerade kein Besen. Versuch's mit einem anderen Ort.
+  </p>
+
+  <p id="loadError" class="hidden text-center text-sm text-red-800 bg-red-50 border border-red-200 rounded-xl py-6 px-4">
+    Die Termine konnten nicht geladen werden. Prüfe, ob <code>termine.json</code> im selben Ordner liegt und der Pfad in <code>DATA_URL</code> stimmt.
+  </p>
+</main>
+
+<footer class="bg-[var(--wine-deep)] text-[#E9DCC9] mt-10">
+  <div class="max-w-5xl mx-auto px-6 py-8 text-sm leading-relaxed">
+    <p class="font-display italic text-lg text-[var(--gold)] mb-2">Gut zu wissen</p>
+    <p>Alle Angaben ohne Gewähr. Kurzfristige Änderungen vorbehalten. Bitte vor dem Besuch die Öffnungszeiten beim jeweiligen Weingut oder Veranstalter bestätigen – besonders Besenwirtschaften öffnen oft wetterabhängig.</p>
+    <p class="mt-4 text-xs text-[#E9DCC9]/60">© 2026 · Ein Projekt für Weinfreund:innen zwischen Stuttgart, Remstal und Esslingen.</p>
+  </div>
+</footer>
+
+<script>
+  // ---- DATENQUELLE ----
+  // Die Termine liegen NICHT mehr im Code, sondern in termine.json (selber Ordner / Repo).
+  // Zum Aktualisieren: nur termine.json bearbeiten, committen, pushen — dieser Code bleibt unverändert.
+  //
+  // Läuft die Seite auf GitHub Pages, kannst du hier statt "./termine.json" z.B. auch direkt
+  // den GitHub-Pages-Pfad oder eine raw.githubusercontent.com-URL eintragen.
+  const DATA_URL = "./termine.json";
+
+  const DISCLAIMER = "Alle Angaben ohne Gewähr. Kurzfristige Änderungen vorbehalten.";
+  let events = [];
+
+  const grid = document.getElementById('cardGrid');
+  const emptyState = document.getElementById('emptyState');
+  const resultCount = document.getElementById('resultCount');
+  const searchInput = document.getElementById('searchInput');
+  const filterBar = document.getElementById('filterBar');
+  let activeFilter = 'Alle';
+
+  function badgeClasses(cat){
+    return cat === 'Weinfest'
+      ? 'bg-[var(--gold)]/20 text-[var(--wine-deep)]'
+      : 'bg-[var(--wine)]/10 text-[var(--wine)]';
+  }
+
+  function render(){
+    const q = searchInput.value.trim().toLowerCase();
+    const filtered = events.filter(e => {
+      const matchesFilter = activeFilter === 'Alle' || e.category === activeFilter;
+      const matchesSearch = !q || e.name.toLowerCase().includes(q) || e.city.toLowerCase().includes(q);
+      return matchesFilter && matchesSearch;
+    });
+
+    grid.innerHTML = '';
+    emptyState.classList.toggle('hidden', filtered.length !== 0);
+    resultCount.textContent = `${filtered.length} Termin${filtered.length === 1 ? '' : 'e'} gefunden`;
+
+    filtered.forEach(e => {
+      const card = document.createElement('article');
+      card.className = 'card rounded-2xl p-5 flex flex-col gap-3';
+      card.innerHTML = `
+        <div class="flex items-start justify-between gap-3">
+          <span class="text-[10px] font-mono uppercase px-2.5 py-1 rounded-full ${badgeClasses(e.category)}">${e.category}</span>
+          <span class="seal shrink-0 w-14 h-14 rounded-full flex items-center justify-center text-center font-mono text-[9px] leading-tight px-1">${e.dateRange.split('–')[0].trim()}</span>
+        </div>
+        <h3 class="font-display text-xl leading-snug text-[var(--wine-deep)]">${e.name}</h3>
+        <p class="font-mono text-[11px] text-[var(--wine)]/80 uppercase tracking-wide">${e.dateRange}</p>
+        <p class="text-sm text-[var(--ink)]/90"><strong class="font-medium">Öffnungszeiten:</strong> ${e.hours}</p>
+        <p class="text-sm text-[var(--ink)]/70">${e.address}</p>
+        <p class="text-sm leading-relaxed text-[var(--ink)]/85 border-t border-[var(--wine)]/10 pt-3">${e.description}</p>
+        <div class="mt-auto pt-3 border-t border-[var(--wine)]/10 text-[11px] text-[var(--ink)]/50 leading-relaxed">
+          <p>Quelle: ${e.source}</p>
+          <p class="italic mt-1">${DISCLAIMER}</p>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  filterBar.addEventListener('click', (ev) => {
+    const btn = ev.target.closest('.filter-btn');
+    if (!btn) return;
+    filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    render();
+  });
+
+  searchInput.addEventListener('input', render);
+
+  async function loadData(){
+    try{
+      const res = await fetch(DATA_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      events = await res.json();
+      render();
+    } catch (err){
+      console.error("Termine konnten nicht geladen werden:", err);
+      document.getElementById('loadError').classList.remove('hidden');
+      resultCount.textContent = "";
+    }
+  }
+
+  loadData();
+</script>
+</body>
+</html>

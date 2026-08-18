@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Besenwirtschaft Weingut Kiesel",
+    "category": "Besenzeit",
+    "city": "Weinstadt-Schnait",
+    "address": "Schillerstraße 4, 71384 Weinstadt-Schnait",
+    "dateRange": "19. Februar – 8. März 2026",
+    "hours": "Täglich 11:30–22:00 Uhr, kein Ruhetag",
+    "description": "Ein Frühjahrsbesen im Remstal, bei dem die eigenen Gutsweine zu schwäbischer Hausmannskost aufgetischt werden. Die durchgehenden Öffnungszeiten machen einen spontanen Besuch unter der Woche genauso leicht wie am Wochenende.",
+    "source": "stuttgarter-zeitung.de"
+  },
+  {
+    "name": "Sonna-Besa – Weingut Knauß",
+    "category": "Besenzeit",
+    "city": "Weinstadt-Strümpfelbach",
+    "address": "Nolten 2, 71384 Weinstadt-Strümpfelbach",
+    "dateRange": "23. Februar – 19. April 2026",
+    "hours": "Fr/Sa ab 14:00 Uhr, So & Feiertag ab 12:00 Uhr",
+    "description": "Mitten in den Weinbergen gelegen, mit Blick ins Remstal. Ausgeschenkt werden die hauseigenen Tropfen vom Basis- bis zum Lagenwein, dazu gibt es saisonale schwäbische Küche aus der Familienküche.",
+    "source": "stuttgarter-zeitung.de"
+  },
+  {
+    "name": "Hofbesen – Weingut Schwegler",
+    "category": "Besenzeit",
+    "city": "Weinstadt-Endersbach (Remstal)",
+    "address": "Endersbacher Lagen, 71384 Weinstadt",
+    "dateRange": "9. – 26. Juli 2026",
+    "hours": "Do–Sa ab 16:00 Uhr, So 11:00–20:00 Uhr, Mo–Mi Ruhetag",
+    "description": "Sommerlicher Besen eines Weinguts, das seine Reben in den Endersbacher Lagen Hintere Klinge und Wetzstein bewirtschaftet. Klassische Besenatmosphäre mit klarer Wochenstruktur – drei Ruhetage sorgen für entspannten Betrieb an den offenen Tagen.",
+    "source": "weingut-schwegler.de"
+  },
+  {
+    "name": "Besagärtle – Weingut W. Häfner",
+    "category": "Besenzeit",
+    "city": "Remshalden-Geradstetten",
+    "address": "Unterer Wasen 11, 73630 Remshalden-Geradstetten",
+    "dateRange": "14. Mai – 2. August 2026",
+    "hours": "Do 17–21 Uhr, Fr/Sa 17–22:30 Uhr, So & Feiertag 13–19 Uhr (nur bei schönem Wetter)",
+    "description": "Sommerbesen direkt am Weingutshof an der Rems, nur wenige Gehminuten von der S-Bahn-Haltestelle Geradstetten entfernt. Alle Weine, Sekte und Säfte stammen aus eigener Herstellung – ideal als Zwischenstopp auf der Remstalradroute.",
+    "source": "weinguthaefner.de"
+  },
+  {
+    "name": "Stuttgarter Weindorf",
+    "category": "Weinfest",
+    "city": "Stuttgart",
+    "address": "Marktplatz, Schillerplatz & Kirchstraße, Stuttgart",
+    "dateRange": "20. August – 5. September 2026",
+    "hours": "So–Mi 12–23 Uhr, Do–Sa 12–24 Uhr",
+    "description": "Stuttgarts große Weinfest-Institution feiert 2026 ihr 50-jähriges Bestehen. Rund 30 Wirtinnen und Wirte schenken mitten in der Innenstadt Weine aus Württemberg und Baden aus, dazu schwäbische Küche in liebevoll dekorierten Lauben. Der Eintritt ist frei.",
+    "source": "stuttgarter-weindorf.de"
+  },
+  {
+    "name": "Esslinger Wein-Lounge am Hafenmarkt",
+    "category": "Weinfest",
+    "city": "Esslingen am Neckar",
+    "address": "Hafenmarkt, 73728 Esslingen am Neckar",
+    "dateRange": "23. – 27. Juli 2026",
+    "hours": "Details zu Tageszeiten laut Veranstalter",
+    "description": "Fünf Tage lang verwandelt sich der Esslinger Hafenmarkt in eines der größeren Weinfeste der Region Stuttgart. Neue Winzer, mehr Fläche und ein breiteres Angebot sollen die inzwischen fünfte Ausgabe zum bislang größten Event dieser Reihe machen.",
+    "source": "weinloungeesslingen.de"
+  }
+]
